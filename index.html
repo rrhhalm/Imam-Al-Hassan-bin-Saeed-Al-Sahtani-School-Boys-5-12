@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدرسة الإمام الحسن بن سعيد السحتني للبنين</title>
+    
+    <!-- ربط خط جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- ربط ملف التصميم CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <!-- ضع صورة الشعار هنا وتأكد من تسميتها logo.png.jpg -->
+            <img src="logo.png.jpg" alt="شعار المدرسة" onerror="this.style.display='none'; document.getElementById('fallback-text').style.display='block';">
+            <div id="fallback-text" style="display:none; color: red; font-weight: bold; margin-bottom: 10px;">
+                (يرجى وضع صورة الشعار باسم logo.png.jpg في نفس المجلد)
+            </div>
+        </div>
+        <h1>مدرسة الإمام الحسن بن سعيد السحتني للبنين</h1>
+        <h2>(5-12)</h2>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Main Icons -->
+        <div class="card-btn" id="btn-attendance" onclick="openSection('attendance-section')">
+            <div class="icon">📋</div>
+            <h3>الحضور والغياب</h3>
+        </div>
+
+        <div class="card-btn" id="btn-activities" onclick="openSection('activities-section')">
+            <div class="icon">🎭</div>
+            <h3>فعاليات المدرسة</h3>
+        </div>
+
+        <!-- Attendance Section (Hidden by default) -->
+        <div id="attendance-section" class="section-content">
+            <div class="section-header">
+                <h2>📋 سجل الحضور والغياب</h2>
+                <button class="close-btn" onclick="closeSection('attendance-section')">إغلاق ✖</button>
+            </div>
+            <div id="classes-container">
+                <!-- سيتم توليد الصفوف هنا بواسطة JavaScript -->
+            </div>
+        </div>
+
+        <!-- Activities Section (Hidden by default) -->
+        <div id="activities-section" class="section-content">
+            <div class="section-header">
+                <h2>🎭 فعاليات المدرسة</h2>
+                <button class="close-btn" onclick="closeSection('activities-section')">إغلاق ✖</button>
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <h4>اليوم الرياضي السنوي</h4>
+                    <p>فعاليات رياضية ترفيهية بين الصفوف لتعزيز روح الفريق واللياقة البدنية.</p>
+                </div>
+                <div class="activity-card">
+                    <h4>مسابقة القرآن الكريم</h4>
+                    <p>مسابقة سنوية لحفظ وتلاوة القرآن الكريم لجميع المراحل الدراسية.</p>
+                </div>
+                <div class="activity-card">
+                    <h4>معرض العلوم والابتكار</h4>
+                    <p>عرض مشاريع الطلاب العلمية المبتكرة وتشجيع البحث والتفكير الإبداعي.</p>
+                </div>
+                <div class="activity-card">
+                    <h4>رحلة مدرسية</h4>
+                    <p>رحلات ترفيهية وتعليمية لتعزيز المعرفة وبناء العلاقات بين الطلاب.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ربط ملف البرمجة JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
