@@ -1,0 +1,414 @@
+/* =========================================
+   1. الإعدادات الأساسية والألوان
+   ========================================= */
+:root {
+    --primary-color: #0b6e4f; /* الأخضر الداكن */
+    --secondary-color: #d4a017; /* الذهبي */
+    --bg-color: #f4f7f6; /* خلفية الموقع */
+    --text-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. رأس الصفحة (الشعار والعنوان)
+   ========================================= */
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-bottom: 4px solid var(--primary-color);
+    
+    /* تمت إضافة هذا السطر لإصلاح زر تسجيل الخروج */
+    position: relative; 
+}
+
+.logo-container img {
+    width: 200px;
+    max-width: 100%;
+    margin-bottom: 10px;
+    mix-blend-mode: multiply; /* لإخفاء الخلفية البيضاء للشعار */
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+header h2 {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* =========================================
+   3. الحاوية الرئيسية والأزرار
+   ========================================= */
+.container {
+    max-width: 1000px;
+    width: 90%;
+    margin: 40px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+.card-btn {
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 40px 30px;
+    width: 280px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-btn:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(11, 110, 79, 0.2);
+    border-color: var(--primary-color);
+}
+
+/* خط علوي ملون يظهر عند التمرير */
+.card-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: right;
+}
+
+.card-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.card-btn#btn-report::before {
+    background: #c62828; /* لون أحمر لزر التقرير */
+}
+
+.card-btn .icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.card-btn:hover .icon {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.card-btn h3 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+}
+
+/* =========================================
+   4. الأقسام المخفية (الحضور، الفعاليات، التقرير)
+   ========================================= */
+.section-content {
+    display: none;
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    animation: fadeIn 0.5s ease;
+}
+
+.section-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 15px;
+}
+
+.section-header h2 {
+    color: var(--primary-color);
+}
+
+.close-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    background: #cc0000;
+}
+
+/* =========================================
+   5. قوائم الصفوف والشعب (الأكورديون)
+   ========================================= */
+.accordion-item {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background-color: var(--bg-color);
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.accordion-header:hover {
+    background-color: #e0ebe8;
+}
+
+.accordion-content {
+    display: none;
+    padding: 15px 20px;
+    background: white;
+    border-top: 1px solid #ddd;
+}
+
+.accordion-content.active {
+    display: block;
+}
+
+.class-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.class-list li {
+    background: var(--secondary-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.class-list li:hover {
+    background: #b8860b;
+}
+
+/* =========================================
+   6. قسم الفعاليات
+   ========================================= */
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.activity-card {
+    background: var(--bg-color);
+    border-radius: 15px;
+    padding: 20px;
+    border-right: 5px solid var(--secondary-color);
+    transition: 0.3s;
+}
+
+.activity-card:hover {
+    transform: scale(1.02);
+}
+
+.activity-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.activity-card p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* =========================================
+   7. سجل الحضور والغياب (قائمة الطلاب)
+   ========================================= */
+.students-list {
+    margin-top: 15px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.student-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.student-row:last-child {
+    border-bottom: none;
+}
+
+.student-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.attendance-actions button {
+    padding: 5px 15px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-present { background: #e0f2f1; color: #0b6e4f; }
+.btn-present.active { background: #0b6e4f; color: white; }
+
+.btn-absent { background: #ffebee; color: #c62828; }
+.btn-absent.active { background: #c62828; color: white; }
+
+.save-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+.save-btn:hover { background: #b8860b; }
+
+.students-container { display: none; margin-top: 20px; }
+.students-container.active { display: block; }
+
+/* =========================================
+   8. تقرير الغياب اليومي (الجدول)
+   ========================================= */
+.report-btn {
+    background: #c62828;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(198, 40, 40, 0.3);
+}
+
+.report-btn:hover {
+    background: #b71c1c;
+    transform: translateY(-3px);
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.report-table th, .report-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: right;
+}
+
+.report-table th {
+    background: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.report-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.no-absences {
+    text-align: center;
+    padding: 40px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: #e0f2f1;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+/* =========================================
+   9. تنسيقات القائمة المنسدلة الخاصة بالطلاب (الجديدة)
+   ========================================= */
+#students-list .accordion-header {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.2rem;
+}
+
+#students-list .accordion-header:hover {
+    background-color: #095a40;
+}
+
+#students-list .accordion-content {
+    padding: 0; 
+    border: none;
+}
+
+#students-list .students-list {
+    margin-top: 0;
+    border: none;
+    border-radius: 0 0 10px 10px;
+}

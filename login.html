@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - مدرسة الإمام الحسن</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            border-top: 5px solid #0b6e4f;
+        }
+        .login-box img {
+            width: 150px;
+            margin-bottom: 20px;
+            mix-blend-mode: multiply;
+        }
+        .login-box h2 {
+            color: #0b6e4f;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #0b6e4f;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #0b6e4f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .login-btn:hover {
+            background: #095a40;
+        }
+        .error-msg {
+            color: red;
+            margin-top: 15px;
+            display: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-box">
+        <img src="logo.png.jpg" alt="الشعار" onerror="this.style.display='none'">
+        <h2>تسجيل الدخول للنظام</h2>
+        
+        <div class="input-group">
+            <label>اسم المستخدم</label>
+            <input type="text" id="username" placeholder="أدخل اسم المستخدم">
+        </div>
+        
+        <div class="input-group">
+            <label>كلمة المرور</label>
+            <input type="password" id="password" placeholder="أدخل كلمة المرور">
+        </div>
+        
+        <button class="login-btn" onclick="login()">دخول</button>
+        
+        <p class="error-msg" id="error-msg">اسم المستخدم أو كلمة المرور غير صحيحة!</p>
+    </div>
+
+    <script>
+        // قائمة المستخدمين وصلاحياتهم
+        const users = [
+            { username: "admin", password: "1234", name: "المدير", role: "admin" },
+            { username: "teacher1", password: "5678", name: "المعلم الأول", role: "teacher" },
+            { username: "teacher2", password: "9999", name: "المعلم الثاني", role: "teacher" },
+            { username: "15443752", password: "71958586", name: "رشيد المياحي", role: "admin" },
+            { username: "social", password: "2024", name: "الأخصائي الاجتماعي", role: "social_worker" }
+        ];
+
+        function login() {
+            const userInp = document.getElementById('username').value;
+            const passInp = document.getElementById('password').value;
+            const errorMsg = document.getElementById('error-msg');
+
+            // البحث عن المستخدم في القائمة
+            const validUser = users.find(u => u.username === userInp && u.password === passInp);
+
+            if (validUser) {
+                // إذا كانت البيانات صحيحة، نحفظ بيانات المستخدم في المتصفح
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', validUser.name);
+                localStorage.setItem('userRole', validUser.role); // حفظ الصلاحية
+                window.location.href = 'index.html'; // الانتقال للموقع
+            } else {
+                // إذا كانت خاطئة نظهر رسالة خطأ
+                errorMsg.style.display = 'block';
+            }
+        }
+
+        // إذا كان المستخدم مسجل دخوله بالفعل، ننقله للموقع مباشرة
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

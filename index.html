@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- كود الحماية: منع الدخول بدون تسجيل -->
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدرسة الإمام الحسن بن سعيد السحتني للبنين</title>
+    
+    <!-- ربط خط جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- ربط ملف التصميم CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header style="position: relative;">
+        <div class="logo-container">
+            <img src="logo.png.jpg" alt="شعار المدرسة" onerror="this.style.display='none'; document.getElementById('fallback-text').style.display='block';">
+            <div id="fallback-text" style="display:none; color: red; font-weight: bold; margin-bottom: 10px;">
+                (يرجى وضع صورة الشعار باسم logo.png.jpg في نفس المجلد)
+            </div>
+        </div>
+        <h1>مدرسة الإمام الحسن بن سعيد السحتني للبنين</h1>
+        <h2>(5-12)</h2>
+
+        <!-- زر تسجيل الخروج -->
+        <div style="position: absolute; top: 20px; left: 20px;">
+            <button onclick="logout()" style="padding: 8px 15px; background: #c62828; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-family: 'Tajawal', sans-serif;">تسجيل الخروج 🚪</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Main Icons (الأزرار الرئيسية) -->
+        <div class="card-btn" id="btn-attendance" onclick="openSection('attendance-section')">
+            <div class="icon">📋</div>
+            <h3>الحضور والغياب</h3>
+        </div>
+
+        <div class="card-btn" id="btn-report" onclick="openSection('report-section')" style="border-color: #c62828;">
+            <div class="icon">📊</div>
+            <h3 style="color: #c62828;">تقرير الغياب اليومي</h3>
+        </div>
+
+        <div class="card-btn" id="btn-activities" onclick="openSection('activities-section')">
+            <div class="icon">🎭</div>
+            <h3>فعاليات المدرسة</h3>
+        </div>
+
+        <!-- زر الأخصائي الاجتماعي (مخفي افتراضياً) -->
+        <div class="card-btn" id="btn-social" onclick="openSection('social-section')" style="border-color: #6a1b9a; display: none;">
+            <div class="icon">👨‍⚕️</div>
+            <h3 style="color: #6a1b9a;">الأخصائي الاجتماعي</h3>
+        </div>
+
+        <!-- ================= الأقسام المخفية ================= -->
+
+        <!-- 1. قسم الحضور والغياب -->
+        <div id="attendance-section" class="section-content">
+            <div class="section-header">
+                <h2>📋 سجل الحضور والغياب</h2>
+                <button class="close-btn" onclick="closeSection('attendance-section')">إغلاق ✖</button>
+            </div>
+            
+            <!-- قائمة اختيار الحصة -->
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-right: 5px solid var(--secondary-color); display: flex; align-items: center; gap: 15px;">
+                <label style="font-weight: bold; color: var(--primary-color);">اختر الحصة الدراسية:</label>
+                <select id="lesson-selector" onchange="changeLesson()" style="padding: 10px; border-radius: 8px; border: 1px solid #ddd; font-family: 'Tajawal', sans-serif; font-size: 1rem; font-weight: bold; cursor: pointer;">
+                    <option value="1">الحصة الأولى</option>
+                    <option value="2">الحصة الثانية</option>
+                    <option value="3">الحصة الثالثة</option>
+                    <option value="4">الحصة الرابعة</option>
+                    <option value="5">الحصة الخامسة</option>
+                    <option value="6">الحصة السادسة</option>
+                    <option value="7">الحصة السابعة</option>
+                    <option value="8">الحصة الثامنة</option>
+                </select>
+            </div>
+
+            <div id="classes-container">
+                <!-- سيتم توليد الصفوف هنا بواسطة JavaScript -->
+            </div>
+        </div>
+
+        <!-- 2. قسم فعاليات المدرسة -->
+        <div id="activities-section" class="section-content">
+            <div class="section-header">
+                <h2>🎭 فعاليات المدرسة</h2>
+                <button class="close-btn" onclick="closeSection('activities-section')">إغلاق ✖</button>
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <h4>اليوم الرياضي السنوي</h4>
+                    <p>فعاليات رياضية ترفيهية بين الصفوف لتعزيز روح الفريق واللياقة البدنية.</p>
+                </div>
+                <div class="activity-card">
+                    <h4>مسابقة القرآن الكريم</h4>
+                    <p>مسابقة سنوية لحفظ وتلاوة القرآن الكريم لجميع المراحل الدراسية.</p>
+                </div>
+                <div class="activity-card">
+                    <h4>معرض العلوم والابتكار</h4>
+                    <p>عرض مشاريع الطلاب العلمية المبتكرة وتشجيع البحث والتفكير الإبداعي.</p>
+                </div>
+                <div class="activity-card">
+                    <h4>رحلة مدرسية</h4>
+                    <p>رحلات ترفيهية وتعليمية لتعزيز المعرفة وبناء العلاقات بين الطلاب.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. قسم تقرير الغياب اليومي -->
+        <div id="report-section" class="section-content">
+            <div class="section-header">
+                <h2 style="color: #c62828;">📊 تقرير الغياب اليومي</h2>
+                <button class="close-btn" onclick="closeSection('report-section')">إغلاق ✖</button>
+            </div>
+            
+            <!-- أزرار التحكم -->
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                <button class="report-btn" onclick="generateDailyReport()">🔄 تحديث وعرض التقرير</button>
+                <button class="report-btn" style="background-color: #0b6e4f; box-shadow: 0 4px 10px rgba(11, 110, 79, 0.3);" onclick="exportToExcel()">📥 تصدير إلى إكسل</button>
+            </div>
+            
+            <div id="report-container">
+                <p style="text-align: center; color: #666;">اضغط على زر "تحديث وعرض التقرير" لرؤية الغائبين.</p>
+            </div>
+        </div>
+
+        <!-- 4. قسم الأخصائي الاجتماعي -->
+        <div id="social-section" class="section-content">
+            <div class="section-header">
+                <h2 style="color: #6a1b9a;">👨‍⚕️ لوحة الأخصائي الاجتماعي</h2>
+                <button class="close-btn" onclick="closeSection('social-section')">إغلاق ✖</button>
+            </div>
+            
+            <p style="margin-bottom: 20px; color: #666;">من هنا يمكنك مراجعة سجلات الغياب وتعديلها أو مسحها بالكامل.</p>
+
+            <!-- أزرار التحكم بالأخصائي -->
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+                <button class="report-btn" style="background-color: #6a1b9a;" onclick="loadAllAbsences()">📋 عرض كل الغياب المسجل</button>
+                <button class="report-btn" style="background-color: #c62828;" onclick="clearAllAbsences()">🗑️ مسح جميع سجلات الغياب</button>
+            </div>
+
+            <div id="social-report-container">
+                <p style="text-align: center; color: #666;">اضغط على "عرض كل الغياب" لرؤية السجلات.</p>
+            </div>
+        </div>
+
+    </div> <!-- نهاية الـ container -->
+
+    <!-- مكتبة تصدير الإكسل -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- ربط ملف البرمجة JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
